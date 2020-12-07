@@ -6,6 +6,7 @@
   .header {
     max-width: var(--banner-width);
     margin: 0 auto;
+    padding: 0 10px;
   }
 
   .container {
@@ -16,6 +17,7 @@
   .banner-container {
     width: 100%;
     padding: 0 10px;
+    margin-right: 0px;
   }
 
   .banner-form {
