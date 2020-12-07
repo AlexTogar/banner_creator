@@ -6,4 +6,3 @@ import './css/style.css';
 import './css/media.css';
 
 ReactDOM.render(<App />, document.querySelector('#root'));
-console.log(ReactDOMServer.renderToString(<App />));

@@ -19,7 +19,12 @@ export default class BannerParametersForm extends Component {
         <div className='banner-form__title'>
           <div className='banner-form__icon icon'></div>
           <div className='banner-form__text'>Customize your banner</div>
-          <div className='banner-form__default-button button'>
+          <div
+            className='banner-form__default-button button'
+            onClick={() => {
+              this.props.onParamsToDefault();
+            }}
+          >
             <div className='button__text'>Set to default</div>
             <div className='banner-form__default-icon button__icon icon'></div>
           </div>
@@ -89,11 +94,16 @@ export default class BannerParametersForm extends Component {
             value={params.link}
           />
         </form>
-        <div className='export-button button'>
-          <div className='button__text'>Export settings</div>
+        <div
+          className='export-button button'
+          onClick={() => {
+            this.props.onCopyFormParams();
+          }}
+        >
+          <div className='button__text'>Copy settings</div>
           <div className='export-button__icon button__icon icon'></div>
         </div>
-      </div>
+    </div>
     );
   }
 }

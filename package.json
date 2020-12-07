@@ -5,7 +5,8 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --mode development --watch",
+    "start": "live-server --host=localhost --port=3999 --open=/dist",
+    "start_webpack": "webpack --mode development --watch",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -19,6 +20,9 @@
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
+    "http-server": "^0.12.3",
+    "live-server": "^1.2.1",
+    "node-static": "^0.7.11",
     "style-loader": "^2.0.0",
     "webpack": "^5.6.0",
     "webpack-cli": "^4.2.0",
