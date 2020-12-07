@@ -39,21 +39,20 @@ export default class Banner extends Component {
       fontWeight: '600',
       width: '60%',
       display: 'flex',
-      alignItems: 'center',
       textDecoration: 'none',
+      maxHeight: '105px',
+      overflow: 'hidden',
     };
 
-    const text =
-      params.text.length > MAX_SYMBOLS_NUMBER
-        ? params.text.substr(0, MAX_SYMBOLS_NUMBER)
-        : params.text;
+    const text = this.props.params.text;
+
     return (
       <a href={params.link} className='banner' style={bannerStyle}>
         <img
           src={params.imageURL}
           onError={() => {
             this.props.onUpdateErrorMessage(
-              'Cannot load image by that address'
+              'Cannot get an image at this address'
             );
           }}
           className='banner__image'
@@ -61,7 +60,17 @@ export default class Banner extends Component {
           crossOrigin='anonymous'
         />
         <div className='banner__text' style={textStyle}>
-          <span style={{ margin: '0 auto' }}>{text}</span>
+          <span
+            style={{
+              margin: '0 auto',
+              whiteSpace: 'pre-wrap',
+              wordWrap: 'break-word',
+              width: '100%',
+              textAlign: 'center',
+            }}
+          >
+            {text}
+          </span>
         </div>
       </a>
     );

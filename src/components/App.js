@@ -51,9 +51,6 @@ export default class App extends Component {
       return state;
     });
 
-    console.log(
-      Object.values(paramsWithError).reduce((acc, elem) => acc && elem, true)
-    );
     if (
       Object.values(paramsWithError).reduce((acc, elem) => acc || elem, false)
     ) {
@@ -86,17 +83,25 @@ export default class App extends Component {
   }
 
   downloadAsHTML() {
-    const html = ReactDOMServer.renderToString(
-      <Banner
-        params={this.state.validFormParams}
-        onUpdateErrorMessage={this.updateErrorMessage}
-      />
-    );
-    downloadText(html, 'bannerHTML.txt');
+    try {
+      const html = ReactDOMServer.renderToString(
+        <Banner
+          params={this.state.validFormParams}
+          onUpdateErrorMessage={this.updateErrorMessage}
+        />
+      );
+      downloadText(html, 'banner.html');
+    } catch {
+      this.updateErrorMessage(`Can't download as html`);
+    }
   }
 
   copyFormParams() {
-    navigator.clipboard.writeText(JSON.stringify(this.state.validFormParams));
+    try {
+      navigator.clipboard.writeText(JSON.stringify(this.state.validFormParams));
+    } catch {
+      this.updateErrorMessage(`Can't copy settings`);
+    }
   }
 
   render() {
@@ -121,15 +126,11 @@ export default class App extends Component {
               params={this.state.validFormParams}
               onUpdateErrorMessage={this.updateErrorMessage}
             />
-            <div className='export-button button'>
-              <div className='button__text' onClick={this.downloadAsPNG}>
-                Export as PNG
-              </div>
+            <div className='export-button button' onClick={this.downloadAsPNG}>
+              <div className='button__text'>Export as PNG</div>
             </div>
-            <div className='export-button button'>
-              <div className='button__text' onClick={this.downloadAsHTML}>
-                Export as HTML
-              </div>
+            <div className='export-button button' onClick={this.downloadAsHTML}>
+              <div className='button__text'>Export as HTML</div>
             </div>
           </div>
           <BannerForm
