@@ -24,8 +24,12 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    port: 3999,
+  },
   plugins: [
     new HtmlWebpackPlugin({
+      filename: './dist/index.html',
       template: './src/index.html',
     }),
   ],

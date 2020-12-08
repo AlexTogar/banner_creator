@@ -78,7 +78,7 @@ export default class BannerParametersForm extends Component {
               onChange={this.handleUpdateParam}
               paramname='color2'
               type='text'
-              placeholder='#000'
+              placeholder='#fff'
               value={params.color2}
             />
           </div>
@@ -103,7 +103,7 @@ export default class BannerParametersForm extends Component {
           <div className='button__text'>Copy settings</div>
           <div className='export-button__icon button__icon icon'></div>
         </div>
-    </div>
+      </div>
     );
   }
 }

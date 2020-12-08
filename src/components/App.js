@@ -3,9 +3,8 @@ import html2canvas from 'html2canvas';
 import ReactDOMServer from 'react-dom/server';
 import Banner from './Banner';
 import BannerForm from './BannerForm';
-import { copyObj, isValid, downloadCanvas, downloadText } from '../helper';
+import Helper from '../helper';
 import defaultFormParams from '../defaultFormParams.json';
-
 /*
 Each field should be valid
 defaultFormParams === {
@@ -20,14 +19,14 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      validFormParams: copyObj(defaultFormParams),
-      formParams: copyObj(defaultFormParams),
+      validFormParams: Helper.copyObj(defaultFormParams),
+      formParams: Helper.copyObj(defaultFormParams),
       paramsWithError: {
-        imageURL: !isValid('imageURL', defaultFormParams.imageURL),
-        text: !isValid('text', defaultFormParams.text),
-        color1: !isValid('color1', defaultFormParams.color1),
-        color2: !isValid('color2', defaultFormParams.color2),
-        link: !isValid('link', defaultFormParams.link),
+        imageURL: !Helper.isValid('imageURL', defaultFormParams.imageURL),
+        text: !Helper.isValid('text', defaultFormParams.text),
+        color1: !Helper.isValid('color1', defaultFormParams.color1),
+        color2: !Helper.isValid('color2', defaultFormParams.color2),
+        link: !Helper.isValid('link', defaultFormParams.link),
       },
       errorMessage: '',
     };
@@ -40,24 +39,31 @@ export default class App extends Component {
   }
 
   updateParam(paramName, value) {
-    const isValidValue = isValid(paramName, value);
-    const paramsWithError = copyObj(this.state.paramsWithError);
-    paramsWithError[paramName] = !isValidValue;
+    const isValidValue = Helper.isValid(paramName, value);
 
     this.setState((state) => {
-      if (isValidValue) state.validFormParams[paramName] = value;
-      state.formParams[paramName] = value;
-      state.paramsWithError = paramsWithError;
-      return state;
+      const newState = Helper.copyObj(state);
+      if (isValidValue) newState.validFormParams[paramName] = value;
+      newState.formParams[paramName] = value;
+      newState.paramsWithError[paramName] = !isValidValue;
+      return newState;
     });
 
-    if (
-      Object.values(paramsWithError).reduce((acc, elem) => acc || elem, false)
-    ) {
-      this.updateErrorMessage('Incorrect input format');
-    } else {
-      this.updateErrorMessage('');
-    }
+    //get actual state and update error message
+    Promise.resolve().then(() => {
+      const errorMessage = Object.entries(this.state.paramsWithError).reduce(
+        (acc, keyValue) => {
+          const [key, value] = keyValue;
+          return (
+            acc +
+            (value ? `${key} should match: ${Helper.patterns[key]}}\n` : '')
+          );
+        },
+        ''
+      );
+
+      this.updateErrorMessage(errorMessage);
+    });
   }
 
   updateErrorMessage(errorMessage) {
@@ -75,7 +81,7 @@ export default class App extends Component {
       allowTaint: true,
     }).then((canvas) => {
       try {
-        downloadCanvas(canvas, 'image.png');
+        Helper.downloadCanvas(canvas, 'image.png');
       } catch (error) {
         this.updateErrorMessage(error.message);
       }
@@ -90,7 +96,7 @@ export default class App extends Component {
           onUpdateErrorMessage={this.updateErrorMessage}
         />
       );
-      downloadText(html, 'banner.html');
+      Helper.downloadText(html, 'banner.html');
     } catch {
       this.updateErrorMessage(`Can't download as html`);
     }

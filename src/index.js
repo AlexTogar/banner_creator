@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom';
-import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import App from './components/App';
 import './css/style.css';
