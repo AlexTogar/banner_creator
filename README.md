@@ -11,7 +11,7 @@
 - установить параметры по умолчанию;
 - редактировать ссылку для перехода при нажатии на баннер.  
 
-**Приложение выполнено адаптивно** и доступно по адресу:  
+Приложение выполнено адаптивно (для экранов больших и средних размеров) и доступно по адресу:  
 https://alextogar.github.io/banner_creator/index.html  
 
 ![alt text](https://github.com/AlexTogar/banner_creator/blob/master/screenshot.png)  
