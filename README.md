@@ -1,4 +1,4 @@
-# banner_creator
+# BANNER CREATOR
 ### Banner creator - это конструктор баннеров, который состоит из:
 - Превью баннера;
 - Формы ввода параметров баннера;
@@ -8,9 +8,15 @@
 - редактировать иллюстрацию (по ссылке или dataURI);
 - редактировать текст (не более трех строк);
 - изменить цвет (color или gradient);
+- установить параметры по умолчанию;
 - редактировать ссылку для перехода при нажатии на баннер.  
 
-**Приложение адаптивно под мобильные устройства** и доступно по адресу: https://alextogar.github.io/banner_creator/index.html  
+**Приложение выполнено адаптивно** и доступно по адресу:  
+https://alextogar.github.io/banner_creator/index.html  
+
+![alt text](https://github.com/AlexTogar/banner_creator/blob/master/screenshot.png)  
+#### Рисунок 1 - Скриншоты
+
 Для смены иллюстрации используйте следующие ссылки (во избежание проблем с CORS privacy при экспорте в png):  
 чайник: https://alextogar.github.io/banner_creator/img/tea-pot.svg  
 чашка чая: https://alextogar.github.io/banner_creator/img/green-tea.svg  
